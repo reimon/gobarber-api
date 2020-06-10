@@ -20,6 +20,7 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "no-unused-vars": "off",
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
     "import/extensions": [
