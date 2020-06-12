@@ -3,6 +3,7 @@ import 'reflect-metadata';
 
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
+
 import routes from './routes';
 import uploadConfig from './config/upload';
 import AppError from './errors/AppError';
@@ -15,7 +16,7 @@ app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
 
 app.use(
-  (err: Error, request: Request, response: Response, next: NextFunction) => {
+  (err: Error, request: Request, response: Response, _next: NextFunction) => {
     if (err instanceof AppError) {
       return response.status(err.statusCode).json({
         status: 'error',
