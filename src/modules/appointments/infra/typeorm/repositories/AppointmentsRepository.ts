@@ -17,6 +17,8 @@ class AppointmentsRepository implements IAppointmentsRepository {
     });
     return findAppointment;
   }
+
+  public async;
 }
 
 export default AppointmentsRepository;
