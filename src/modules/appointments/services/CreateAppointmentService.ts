@@ -13,7 +13,7 @@ interface IRequest {
 class CreateAppointmentService {
   constructor(private appointmentsRepository: IAppointmentsRepository) {}
 
-  public async execute({ provider_id, date }: IRequest): Promise<Appointment> {
+  public async execute({ date, provider_id }: IRequest): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
 
     const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
@@ -23,11 +23,12 @@ class CreateAppointmentService {
     if (findAppointmentInSameDate) {
       throw new AppError('This appointment is already booked');
     }
+
     const appointment = await this.appointmentsRepository.create({
       provider_id,
       date: appointmentDate,
     });
-    await this.appointmentsRepository.save(appointment);
+
     return appointment;
   }
 }
