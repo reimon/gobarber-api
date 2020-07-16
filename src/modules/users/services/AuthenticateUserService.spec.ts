@@ -3,7 +3,6 @@ import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import AuthenticateUserService from './AuthenticateUserService';
-// import CreateUserService from './CreateUserServices';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvider: FakeHashProvider;
@@ -24,12 +23,12 @@ describe('AuthenticateUser', () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
-      password: '12345678',
+      password: '123456',
     });
 
     const response = await authenticateUser.execute({
       email: 'johndoe@example.com',
-      password: '12345678',
+      password: '123456',
     });
 
     expect(response).toHaveProperty('token');
@@ -40,7 +39,7 @@ describe('AuthenticateUser', () => {
     await expect(
       authenticateUser.execute({
         email: 'johndoe@example.com',
-        password: '12345678',
+        password: '123456',
       })
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -49,7 +48,7 @@ describe('AuthenticateUser', () => {
     await fakeUsersRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
-      password: '12345678',
+      password: '123456',
     });
 
     await expect(
