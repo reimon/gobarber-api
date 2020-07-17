@@ -5,5 +5,5 @@ import EtherealMailProvider from './implementations/EtherealMailProvider';
 
 container.registerInstance<IMailProvider>(
   'IMailProvider',
-  new EtherealMailProvider()
+  container.resolve(EtherealMailProvider)
 );
