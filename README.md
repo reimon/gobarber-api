@@ -7,7 +7,6 @@
 - O usuário deve resetar sua senha;
 
 **Requisitos não Funcionais**
-**_que biblioteca, banco de dados, etc... serão utilizados no sistema_**
 
 - Utilizar Mailtrap para testar envios em ambiente de dev;
 - Utilizar Amazon SES para envios em produção;
