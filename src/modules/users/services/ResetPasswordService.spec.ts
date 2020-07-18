@@ -22,47 +22,47 @@ describe('ResetPasswordService', () => {
       fakeUserTokensRepository
     );
   });
-  // it('should be able to reset the password', async () => {
-  //   const user = await fakeUsersRepository.create({
-  //     name: 'John Doe',
-  //     email: 'johndoe@example.com',
-  //     password: '123456',
-  //   });
+  it('should be able to reset the password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+    });
 
-  //   const { token } = await fakeUserTokensRepository.generate(user.id);
+    const { token } = await fakeUserTokensRepository.generate(user.id);
 
-  //   const generateHash = jest.spyOn(fakeHashProvider, 'generateHash');
+    const generateHash = jest.spyOn(fakeHashProvider, 'generateHash');
 
-  //   await resetPassword.execute({
-  //     password: '121212',
-  //     token,
-  //   });
+    await resetPassword.execute({
+      password: '121212',
+      token,
+    });
 
-  //   const updatedUser = await fakeUsersRepository.findById(user.id);
+    const updatedUser = await fakeUsersRepository.findById(user.id);
 
-  //   expect(generateHash).toHaveBeenCalledWith('121212');
-  //   expect(updatedUser?.password).toBe('121212');
-  // });
-  // it('should not be able to reset the passsword with non-existing token', async () => {
-  //   await expect(
-  //     resetPassword.execute({
-  //       password: '121212',
-  //       token: '',
-  //     })
-  //   ).rejects.toBeInstanceOf(AppError);
-  // });
-  // it('should not be able to reset the passsword with non-existing user', async () => {
-  //   const { token } = await fakeUserTokensRepository.generate(
-  //     'non-existing-user'
-  //   );
+    expect(generateHash).toHaveBeenCalledWith('121212');
+    expect(updatedUser?.password).toBe('121212');
+  });
+  it('should not be able to reset the passsword with non-existing token', async () => {
+    await expect(
+      resetPassword.execute({
+        password: '121212',
+        token: '',
+      })
+    ).rejects.toBeInstanceOf(AppError);
+  });
+  it('should not be able to reset the passsword with non-existing user', async () => {
+    const { token } = await fakeUserTokensRepository.generate(
+      'non-existing-user'
+    );
 
-  //   await expect(
-  //     resetPassword.execute({
-  //       password: '121212',
-  //       token,
-  //     })
-  //   ).rejects.toBeInstanceOf(AppError);
-  // });
+    await expect(
+      resetPassword.execute({
+        password: '121212',
+        token,
+      })
+    ).rejects.toBeInstanceOf(AppError);
+  });
   it('should be able to reset the password if passed more than 2 hours', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
