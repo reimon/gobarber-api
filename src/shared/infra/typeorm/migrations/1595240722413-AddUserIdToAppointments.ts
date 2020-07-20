@@ -1,14 +1,27 @@
-import { MigrationInterface, QueryRunner, TableForeignKey } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  TableColumn,
+  TableForeignKey,
+} from 'typeorm';
 
-// eslint-disable-next-line @typescript-eslint/class-name-casing
-export default class relatAppointmentToUsers1591791545972
+export default class AddUserIdToAppointments1595240722413
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.addColumn(
+      'appointments',
+      new TableColumn({
+        name: 'user_id',
+        type: 'uuid',
+        isNullable: false,
+      })
+    );
+
     await queryRunner.createForeignKey(
       'appointments',
       new TableForeignKey({
-        name: 'AppointmentProvider',
-        columnNames: ['provider_id'],
+        name: 'AppointmentUser',
+        columnNames: ['user_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'users',
         onDelete: 'SET NULL',
@@ -19,5 +32,7 @@ export default class relatAppointmentToUsers1591791545972
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey('appointments', 'AppointmentProvider');
+
+    await queryRunner.dropColumn('appointments', 'user_id');
   }
 }
