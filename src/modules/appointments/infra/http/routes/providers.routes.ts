@@ -22,7 +22,7 @@ providersRouter.get(
 
 providersRouter.get(
   '/:provider_id/day-availability',
-
   providerDayAvailabilityController.index
 );
+
 export default providersRouter;
