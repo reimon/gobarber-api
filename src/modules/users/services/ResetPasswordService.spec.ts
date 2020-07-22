@@ -18,8 +18,8 @@ describe('ResetPasswordService', () => {
 
     resetPassword = new ResetPasswordService(
       fakeUsersRepository,
-      fakeHashProvider,
-      fakeUserTokensRepository
+      fakeUserTokensRepository,
+      fakeHashProvider
     );
   });
   it('should be able to reset the password', async () => {
