@@ -2,7 +2,6 @@ import { injectable, inject } from 'tsyringe';
 
 import { getHours, isAfter } from 'date-fns';
 
-import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequest {
@@ -21,10 +20,7 @@ type IReponse = Array<{
 class ListProviderDayAvailabilityService {
   constructor(
     @inject('AppointmentsRepository')
-    private appointmentsRepository: IAppointmentsRepository,
-
-    @inject('CacheProvider')
-    private cacheProvider: ICacheProvider
+    private appointmentsRepository: IAppointmentsRepository
   ) {}
 
   public async execute({
