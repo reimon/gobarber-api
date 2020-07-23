@@ -2,6 +2,7 @@ import { injectable, inject } from 'tsyringe';
 
 // import { getDaysInMonth, getDate } from 'date-fns';
 
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 import Appointment from '../infra/typeorm/entities/Appointment';
 
@@ -16,7 +17,10 @@ interface IRequest {
 class ListProviderAppointsmentService {
   constructor(
     @inject('AppointmentsRepository')
-    private appointmentsRepository: IAppointmentsRepository
+    private appointmentsRepository: IAppointmentsRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider
   ) {}
 
   public async execute({
@@ -33,7 +37,7 @@ class ListProviderAppointsmentService {
         day,
       }
     );
-
+    await this.cacheProvider.save('dld', 'dd');
     return appointments;
   }
 }
