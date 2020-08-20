@@ -1,4 +1,4 @@
-import { getMongoRepository, MongoRepository, Raw } from 'typeorm';
+import { getMongoRepository, MongoRepository } from 'typeorm';
 
 import ICreateNotificationDTO from '@modules/notifications/dtos/ICreateNotificationDTO';
 import IFindallNotificaionsDTO from '@modules/notifications/dtos/IFindAllNotificationsDTO';
