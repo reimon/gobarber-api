@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe';
-import { classToClass } from 'class-transformer';
+// import { classToClass } from 'class-transformer';
 
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 

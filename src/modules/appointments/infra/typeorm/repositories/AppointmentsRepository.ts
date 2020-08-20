@@ -4,6 +4,8 @@ import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointment
 import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
 import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
+import User from '@modules/users/infra/typeorm/entities/User';
+import IUserRepository from '../repositories/IUsersRepository';
 
 import Appointment from '../entities/Appointment';
 

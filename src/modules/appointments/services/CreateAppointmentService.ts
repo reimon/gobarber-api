@@ -5,7 +5,11 @@ import AppError from '@shared/errors/AppError';
 
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+
+import User from '@modules/users/infra/typeorm/entities/User';
 import Appointment from '../infra/typeorm/entities/Appointment';
+
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequest {
@@ -22,6 +26,9 @@ class CreateAppointmentService {
 
     @inject('NotificationsRepository')
     private notificationsRepository: INotificationsRepository,
+
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider
@@ -65,9 +72,12 @@ class CreateAppointmentService {
 
     const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
 
+    const user = await this.usersRepository.findById(user_id);
+
     await this.notificationsRepository.create({
+      title: 'Novo agendamento',
       recipient_id: provider_id,
-      content: `Novo agendamento para dia agora ${dateFormatted}`,
+      content: `para ${dateFormatted} com o cliente: ${user?.name}, Contato: ${user?.email}`,
       read: false,
     });
 

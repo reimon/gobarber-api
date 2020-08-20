@@ -23,11 +23,13 @@ class NotificationsRepository implements INotificationsRepository {
   }
 
   public async create({
+    title,
     content,
     recipient_id,
     read,
   }: ICreateNotificationDTO): Promise<Notification> {
     const notification = this.ormRepository.create({
+      title,
       content,
       recipient_id,
       read,
